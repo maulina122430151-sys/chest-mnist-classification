@@ -4,12 +4,12 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from datareader import get_data_loaders, NEW_CLASS_NAMES
-from densenet_model import DenseNet121
+from resnet_model import ResNet
 import matplotlib.pyplot as plt
 from utils import plot_training_history, visualize_random_val_predictions
 
 # --- Hyperparameter ---
-EPOCHS = 20
+EPOCHS = 16
 BATCH_SIZE = 10
 LEARNING_RATE = 0.001
 
@@ -20,12 +20,11 @@ def train():
     train_loader, val_loader, num_classes, in_channels = get_data_loaders(BATCH_SIZE)
     
     # 2. Inisialisasi Model
-    model = DenseNet121(in_channels=in_channels, num_classes=num_classes)
-    print("\nMenggunakan model: DenseNet121")
+    model = ResNet(in_channels=in_channels, num_classes=num_classes)
+    print("\nMenggunakan model: ResNet")
     print(model)
     
     # 3. Mendefinisikan Loss Function dan Optimizer
-    # Gunakan BCEWithLogitsLoss untuk klasifikasi biner. Ini lebih stabil secara numerik.
     criterion = nn.BCEWithLogitsLoss()
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
     
@@ -45,7 +44,6 @@ def train():
         train_total = 0
         
         for images, labels in train_loader:
-            images = images
             # Ubah tipe data label menjadi float untuk BCEWithLogitsLoss
             labels = labels.float()
             
@@ -74,7 +72,6 @@ def train():
         
         with torch.no_grad():
             for images, labels in val_loader:
-                images = images
                 labels = labels.float()
                 
                 outputs = model(images)
