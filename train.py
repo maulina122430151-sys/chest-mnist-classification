@@ -4,14 +4,14 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from datareader import get_data_loaders, NEW_CLASS_NAMES
-from resnet_model import ResNet
+from densenet_model import DenseNet121
 import matplotlib.pyplot as plt
 from utils import plot_training_history, visualize_random_val_predictions
 
 # --- Hyperparameter ---
 EPOCHS = 20
 BATCH_SIZE = 10
-LEARNING_RATE = 0.0003
+LEARNING_RATE = 0.001
 
 #Menampilkan plot riwayat training dan validasi setelah training selesai.
 
@@ -20,8 +20,8 @@ def train():
     train_loader, val_loader, num_classes, in_channels = get_data_loaders(BATCH_SIZE)
     
     # 2. Inisialisasi Model
-    model = ResNet(in_channels=in_channels, num_classes=num_classes)
-    print("\nMenggunakan model: ResNet")
+    model = DenseNet121(in_channels=in_channels, num_classes=num_classes)
+    print("\nMenggunakan model: DenseNet121")
     print(model)
     
     # 3. Mendefinisikan Loss Function dan Optimizer
