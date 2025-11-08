@@ -75,6 +75,13 @@ for epoch in range(EPOCHS):
      - Training Loss & Accuracy
      - Validation Loss & Accuracy
 
+### Hasil Training
+Setelah training selama 16 epochs, model mencapai:
+- Training Accuracy: 85.63%
+- Validation Accuracy: 84.38%
+- Training Loss: 0.2912
+- Validation Loss: 0.3245
+
 2. **Visualisasi**
    ```python
    # Plot training history
